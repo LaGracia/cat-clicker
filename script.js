@@ -52,8 +52,6 @@ $('#blue').click(function() {
 REQUIREMENTS 3
 ------------------------------------------------------------------ */
 
-// https://discussions.udacity.com/t/cat-clicker-images-not-showing/159068/3
-
 // Cat names, images, initial scores
 var cats = [
     {
@@ -157,6 +155,7 @@ for (var i = 0; i < cats.length; i++) {
     });
 
     // Add a score element
+    // TO DO: Get live scores instead of initial scores displayed here
     var scoreElem = document.createElement('h4');
     scoreElem.innerHTML = 'Score: ' + cat.score;
 

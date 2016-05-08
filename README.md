@@ -4,9 +4,9 @@ This is a Udacity minicourse project for JavaScript Design Patterns. The project
 
 ### Project details
 
-The [site](http://lagracia.github.io/cat-clicker/) features a list of cats and an area to display the selected cat. The user chooses a cat by clicking on the button showing its name. An image of the selected cat, its name, and its score will show up in the display area. The score increases every time the user clicks on the displayed image.
+The [site](http://lagracia.github.io/cat-clicker/) features a list of cats and an area to display the selected cat. Users choose a cat by clicking on the button showing its name. An image of the selected cat, its name, and its score will show up in the display area.
 
-Below the display area is a grid of image thumbnails showing each cat and its current score.
+The score for the chosen cat increases every time the user clicks on its image. When a second cat is chosen, the score for the first cat does not reset. It will continue from where it left off when the user chooses the first cat again.
 
 ### Credits
 

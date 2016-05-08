@@ -3,56 +3,208 @@
 * after every quiz, I have commented out the previous solution. */
 
 /* ------------------------------------------------------------------
-REQUIREMENTS 1
------------------------------------------------------------------- 
-
-// https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
-
-// Increment the counter
-var i = 1;
-function countClicks() {
-    var changeCounter = document.getElementById('tinyscore');
-    changeCounter.firstChild.nodeValue = i++;    
-}
-
-// Change the content of the heading
-function modifyText(new_text) {
-    var changeHeading = document.getElementById('tinyheading');
-    changeHeading.firstChild.nodeValue = new_text;    
-}
-
-// Add an event listener to the image and change the counter text
-var elem = document.getElementById('tiny');
-elem.addEventListener('click', function() {
-    modifyText('Again!');
-    countClicks();
-}, false);
-*/
-/* ------------------------------------------------------------------
-REQUIREMENTS 2
------------------------------------------------------------------- 
-
-// https://gist.github.com/frankyonnetti/8373904
-
-var count = 0;
-
-// Increment the counter for the first image
-$('#tiny').click(function() {
-    count++;
-    $('#tinyscore').html(count);
-});
-
-// Increment the counter for the second image
-$('#blue').click(function() {
-    count++;
-    $('#bluescore').html(count);
-});
-*/
-/* ------------------------------------------------------------------
-REQUIREMENTS 3
+CAT CLICKER PREMIUM WITH OCTOPUS
 ------------------------------------------------------------------ */
 
-// Cat names, images, initial scores
+// Wait for document to finish loading before running the enclosed functions
+// http://www.w3schools.com/jquery/jquery_syntax.asp
+$(function(){
+
+    var model = {
+
+        // Define the chosen cat as a null object by default
+        chosenCat: null,
+
+        // Array of cat names, images, initial scores
+        cats: [
+            {
+                name: 'Tiny',
+                image: 'images/cat1.jpg',
+                score: 0,
+            },
+            {
+                name: 'Blue',
+                image: 'images/cat2.jpg',
+                score: 0,
+            },
+            {
+                name: 'Twins',
+                image: 'images/cat3.jpg',
+                score: 0,
+            },
+            {
+                name: 'Scaredy',
+                image: 'images/cat4.jpg',
+                score: 0,
+            },
+            {
+                name: 'Aristo',
+                image: 'images/cat5.jpg',
+                score: 0,
+            },
+            {
+                name: 'Cutie',
+                image: 'images/cat6.jpg',
+                score: 0,
+            },
+        ]
+
+    };
+
+    var octopus = {
+
+        // On load, set chosen cat to the first one in the array in the model
+        init: function() {
+            model.chosenCat = model.cats[0];
+
+            // Tell the display and list views to load themselves
+            displayView.init();
+            listView.init();
+        },
+
+        // Get all cats from the model for the list and thumbnail views
+        getCats: function() {
+            return model.cats;
+        },
+
+        // Get the chosen cat from the model for the display view
+        getChosenCat: function() {
+            return model.chosenCat;
+        },
+
+        // Set chosen cat to match what the user clicks on in the list view
+        setChosenCat: function(cat) {
+            model.chosenCat = cat;
+        },
+
+        // Increment score taken from model; tell display view to update itself
+        incrementScore: function() {
+            model.chosenCat.score++;
+            displayView.render();
+        },
+
+    };
+
+    var displayView = {
+
+        // On load, prepare chosen-cat elements in display section
+        init: function() {
+            this.chosenImg = document.getElementById('chosen-image');
+            this.chosenName = document.getElementById('chosen-name');
+            this.chosenScore = document.getElementById('chosen-score');
+
+            // When user clicks on cat image, tell octopus to increment score
+            this.chosenImg.addEventListener('click', function(e) {
+                octopus.incrementScore();
+            });
+
+            // Call the display-view render function
+            this.render();
+        },
+
+        render: function() {
+            // Get info on chosen cat from the octopus; update display view
+            var chosenCat = octopus.getChosenCat();
+            this.chosenImg.src = chosenCat.image;
+            this.chosenName.innerHTML = chosenCat.name;
+            this.chosenScore.innerHTML = chosenCat.score;
+        }
+
+    };
+
+    var listView = {
+
+        // On load, prepare the list element in the list section
+        init: function() {
+            this.catList = document.getElementById('cat-list');
+
+            // Call the list-view render function
+            this.render();
+        },
+
+        render: function() {
+
+            // Tell the octopus to get the cat array from the model
+            var cats = octopus.getCats();
+
+            // Clear any content from the list
+            this.catList.innerHTML = '';
+
+            // Loop over the cat array received from the octopus
+            for (var i = 0; i < cats.length; i++) {
+                var cat = cats[i];
+
+                // Make each cat name into a button separated by a line break
+                var catName = document.createElement('button');
+                var lineBreak = document.createElement('p');
+                catName.innerHTML = cat.name;
+
+                // Add the button and line break to the list section
+                this.catList.appendChild(catName);
+                this.catList.appendChild(lineBreak);
+
+                // When user clicks on name, tell octopus to set chosen cat
+                catName.addEventListener('click', (function(catCopy) {
+                    return function() {
+                        octopus.setChosenCat(catCopy);
+
+                        // Update the display view to show the chosen cat
+                        displayView.render();
+                    };
+                })(cat));
+            }
+        }
+    };
+/*    
+    var thumbnailView = {
+
+        // On load, prepare the grid section
+        init: function() {
+            this.catGrid = document.getElementById('grid');
+
+            // Call the thumbnail-view render function
+            this.render();
+        },
+
+        render: function() {
+
+            // Tell the octopus to get the cat array from the model
+            var cats = octopus.getCats();
+
+            // Clear any content from the grid
+            this.catGrid.innerHTML = '';
+
+            // Loop over the cat array received from the octopus
+            for (var i = 0; i < cats.length; i++) {
+                var cat = cats[i];
+
+                // Make each cat image into a thumbnail
+                var catImage = document.createElement('img');
+                catImage.className = 'img-thumbnail';
+                catImage.src = cat.image;
+
+                // Create a thumbnail container
+                var thumbnail = document.createElement('figure');
+                thumbnail.className = 'col-lg-2';
+
+                // Add image to container, and container to grid
+                this.thumbnail.appendChild(catImage);
+                this.catGrid.appendChild(thumbnail);
+            }
+        }
+    };
+*/
+    // Load the octopus
+    octopus.init();
+
+});
+
+
+/* ------------------------------------------------------------------
+CAT CLICKER PREMIUM
+------------------------------------------------------------------ 
+
+// Array of cat names, images, initial scores
 var cats = [
     {
         name: 'Tiny',
@@ -100,8 +252,10 @@ var displayScore = document.createElement('h2');
 displayScore.id = 'chosen-score';
 $('#chosen-cat').append(displayName, displayScore);
 
-// Select each name for the list
-for (i = 0; i < cats.length; i++) {
+// https://discussions.udacity.com/t/cat-clicker-images-not-showing/159068/3
+
+// Loop over the cat array
+for (var i = 0; i < cats.length; i++) {
     var cat = cats[i];
 
     // Create a button
@@ -114,8 +268,6 @@ for (i = 0; i < cats.length; i++) {
     $('#list').append(button);
     $('#list').append(catList);
     
-// https://discussions.udacity.com/t/cat-clicker-images-not-showing/159068/3
-
     // Add event listener for choosing a cat
     button.addEventListener('click', (function(catCopy) {
 
@@ -141,25 +293,19 @@ for (i = 0; i < cats.length; i++) {
         };
     })(cat));
 
-};
-
-// Select each cat for the thumbnails
-for (var i = 0; i < cats.length; i++) {
-    var thumb = cats[i];
-
-    // Create the image element
+    // Create a thumbnail image of each cat
     var imgElem = document.createElement('img');
     $(imgElem).attr({
-        src: thumb.img,
+        src: cats[i].img,
         class: 'img-thumbnail',
     });
 
-    // Add a score element
-    // TO DO: Get live scores instead of initial scores displayed here
+    // Add a score-count element
+    // TO DO: Display live scores instead of initial scores here
     var scoreElem = document.createElement('h4');
     scoreElem.innerHTML = 'Score: ' + cat.score;
 
-    // Create a container for each cat image and score
+    // Create a container for each cat thumbnail and score
     var catContainer = document.createElement('figure');
     catContainer.className = 'col-lg-2';
     $(catContainer).append(imgElem, scoreElem);
@@ -169,3 +315,52 @@ for (var i = 0; i < cats.length; i++) {
     $(catGrid).append(catContainer);
 
 };
+*/
+
+/* ------------------------------------------------------------------
+CAT CLICKER WITH TWO CATS
+------------------------------------------------------------------ 
+
+// https://gist.github.com/frankyonnetti/8373904
+
+var count = 0;
+
+// Increment the counter for the first image
+$('#tiny').click(function() {
+    count++;
+    $('#tinyscore').html(count);
+});
+
+// Increment the counter for the second image
+$('#blue').click(function() {
+    count++;
+    $('#bluescore').html(count);
+});
+*/
+
+/* ------------------------------------------------------------------
+CAT CLICKER WITH ONE CAT
+------------------------------------------------------------------ 
+
+// https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
+
+// Increment the counter
+var i = 1;
+function countClicks() {
+    var changeCounter = document.getElementById('tinyscore');
+    changeCounter.firstChild.nodeValue = i++;    
+}
+
+// Change the content of the heading
+function modifyText(new_text) {
+    var changeHeading = document.getElementById('tinyheading');
+    changeHeading.firstChild.nodeValue = new_text;    
+}
+
+// Add an event listener to the image and change the counter text
+var elem = document.getElementById('tiny');
+elem.addEventListener('click', function() {
+    modifyText('Again!');
+    countClicks();
+}, false);
+*/

@@ -4,7 +4,7 @@
         <title>Cat Clicker</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="bootstrap.css">
     </head>
 <body>
     <main class="container-fluid text-center">
@@ -13,13 +13,42 @@
     It consists of several quizzes. Instead of overwriting the code 
     after every quiz, I have commented out the previous solution. -->
 
-<!-- CAT CLICKER PREMIUM WITH OCTOPUS -->
+<!-- CAT CLICKER PREMIUM PRO -->
+        <section class="row center-block text-center" id="main">
+            <div class="col-lg-3 text-center" id="admin">
+                <h1><b>Cat Clicker</b></h1>
+                <h4>Another Udacity Minicourse Project</h4>
+                <hr>
+                <h4 class="text-muted"><i>No cats were harmed during the development of this site.</i></h4>
+                <hr>
+                <p><button type="button" id="admin-button">Admin</button></p>
+                <form id="admin-form">
+                    <p><b>Name</b> <input type="text" id="name-input" value=></p>
+                    <p><b>URL</b> <input type="text" id="image-input" value=""></p>
+                    <p><b>Score</b> <input type="text" id="score-input" value=""></p>
+                    <p><button id="cancel-button">Cancel</button> <button id="save-button">Save</button>
+                </form>
+            </div>
+            <figure class="col-lg-6" id="display">
+                <img class="img-responsive" id="chosen-image" src="" alt="The Chosen One">
+            </figure>
+            <div class="col-lg-3 text-center" id="list">
+                <h4><em>Select a cat and click on its image to increase its score!</em></h4>
+                <h3 id="chosen-name"></h3>
+                <h3 id="chosen-score"></h3>
+                <hr>
+                <div id="cat-list"></div>
+            </div>
+        </section>
+<!-- -->
+
+<!-- CAT CLICKER PREMIUM WITH OCTOPUS 
         <section class="row center-block text-center" id="display">
             <div class="col-lg-3 text-center" id="chosen-cat">
-                <h1><strong>Cat Clicker</strong></h1>
-                <h4><em>Another Udacity Minicourse Project</em></h4>
+                <h1><b>Cat Clicker</b></h1>
+                <h4>Another Udacity Minicourse Project</h4>
                 <hr>
-                <h4>No cats were harmed during the development of this site.</h4>
+                <h4 class="text-muted"><i>No cats were harmed during the development of this site.</i></h4>
                 <hr>
                 <h1 id="chosen-name"></h1>
                 <h1 id="chosen-score"></h1>
@@ -33,17 +62,15 @@
                 <div id="cat-list"></div>
             </div>
         </section>
-        <section class="row center-block text-center" id="grid">
-        </section>
-<!-- -->
+ -->
 
 <!-- CAT CLICKER PREMIUM 
-        <section class="row center-block text-center" id="display-text">
+        <section class="row center-block text-center" id="display">
             <div class="col-lg-3 text-center" id="chosen-cat">
-                <h1><strong>Cat Clicker</strong></h1>
-                <h4><em>Another Udacity Minicourse Project</em></h4>
+                <h1><b>Cat Clicker</b></h1>
+                <h4>Another Udacity Minicourse Project</h4>
                 <hr>
-                <h4>No cats were harmed during the development of this site.</h4>
+                <h4 class="text-muted"><i>No cats were harmed during the development of this site.</i></h4>
                 <hr>
             </div>
             <figure class="col-lg-6" id="chosen-image">
@@ -86,6 +113,6 @@
 
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-    <script src="script.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>

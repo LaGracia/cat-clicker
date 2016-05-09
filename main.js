@@ -3,7 +3,7 @@
 * after every quiz, I have commented out the previous solution. */
 
 /* ------------------------------------------------------------------
-CAT CLICKER PREMIUM WITH OCTOPUS
+CAT CLICKER PREMIUM PRO
 ------------------------------------------------------------------ */
 
 // Wait for document to finish loading before running the enclosed functions
@@ -15,7 +15,7 @@ $(function(){
         // Define the chosen cat as a null object by default
         chosenCat: null,
 
-        // Array of cat names, images, initial scores
+        // Store array of cat names, images, initial scores
         cats: [
             {
                 name: 'Tiny',
@@ -46,8 +46,10 @@ $(function(){
                 name: 'Cutie',
                 image: 'images/cat6.jpg',
                 score: 0,
-            },
-        ]
+            }
+        ],
+
+        // Keep the admin form hidden by default
 
     };
 
@@ -57,12 +59,13 @@ $(function(){
         init: function() {
             model.chosenCat = model.cats[0];
 
-            // Tell the display and list views to load themselves
+            // Tell the display, list and admin views to load
             displayView.init();
             listView.init();
+            adminView.init();
         },
 
-        // Get all cats from the model for the list and thumbnail views
+        // Get all cats from the model for the list view
         getCats: function() {
             return model.cats;
         },
@@ -83,18 +86,24 @@ $(function(){
             displayView.render();
         },
 
+        // Tell the admin view to show the form
+        showForm: function() {
+            // ?
+
+        }
+
     };
 
     var displayView = {
 
         // On load, prepare chosen-cat elements in display section
         init: function() {
-            this.chosenImg = document.getElementById('chosen-image');
+            this.chosenImage = document.getElementById('chosen-image');
             this.chosenName = document.getElementById('chosen-name');
             this.chosenScore = document.getElementById('chosen-score');
 
             // When user clicks on cat image, tell octopus to increment score
-            this.chosenImg.addEventListener('click', function(e) {
+            this.chosenImage.addEventListener('click', function(e) {
                 octopus.incrementScore();
             });
 
@@ -105,7 +114,7 @@ $(function(){
         render: function() {
             // Get info on chosen cat from the octopus; update display view
             var chosenCat = octopus.getChosenCat();
-            this.chosenImg.src = chosenCat.image;
+            this.chosenImage.src = chosenCat.image;
             this.chosenName.innerHTML = chosenCat.name;
             this.chosenScore.innerHTML = chosenCat.score;
         }
@@ -155,14 +164,156 @@ $(function(){
             }
         }
     };
-/*    
-    var thumbnailView = {
 
-        // On load, prepare the grid section
+    // https://github.com/jmmarco/tesla/blob/master/js/main.js
+    var adminView = {
+
+        // On load, prepare the elements in the admin section
         init: function() {
-            this.catGrid = document.getElementById('grid');
+            this.adminButton = document.getElementById('admin-button');
+            this.adminForm = document.getElementById('admin-form');
+            this.nameInput = document.getElementById('name-input');
+            this.imageInput = document.getElementById('image-input');
+            this.scoreInput = document.getElementById('score-input');
+            this.cancelButton = document.getElementById('cancel-button');
+            this.saveButton = document.getElementById('save-button');
 
-            // Call the thumbnail-view render function
+            // When user clicks on Admin button, tell octopus to show the form
+            this.adminButton.addEventListener('click', function() {
+                octopus.showForm();
+            });
+
+            // Call the admin-view render function
+            this.render();
+        },
+
+        render: function() {
+            // ?
+        };
+
+    // Load the octopus
+    octopus.init();
+
+});
+
+
+/* ------------------------------------------------------------------
+CAT CLICKER PREMIUM WITH OCTOPUS
+------------------------------------------------------------------ 
+
+// Wait for document to finish loading before running the enclosed functions
+// http://www.w3schools.com/jquery/jquery_syntax.asp
+$(function(){
+
+    var model = {
+
+        // Define the chosen cat as a null object by default
+        chosenCat: null,
+
+        // Store array of cat names, images, initial scores
+        cats: [
+            {
+                name: 'Tiny',
+                image: 'images/cat1.jpg',
+                score: 0,
+            },
+            {
+                name: 'Blue',
+                image: 'images/cat2.jpg',
+                score: 0,
+            },
+            {
+                name: 'Twins',
+                image: 'images/cat3.jpg',
+                score: 0,
+            },
+            {
+                name: 'Scaredy',
+                image: 'images/cat4.jpg',
+                score: 0,
+            },
+            {
+                name: 'Aristo',
+                image: 'images/cat5.jpg',
+                score: 0,
+            },
+            {
+                name: 'Cutie',
+                image: 'images/cat6.jpg',
+                score: 0,
+            },
+        ]
+
+    };
+
+    var octopus = {
+
+        // On load, set chosen cat to the first one in the array in the model
+        init: function() {
+            model.chosenCat = model.cats[0];
+
+            // Tell the display and list views to load
+            displayView.init();
+            listView.init();
+        },
+
+        // Get all cats from the model for the list view
+        getCats: function() {
+            return model.cats;
+        },
+
+        // Get the chosen cat from the model for the display view
+        getChosenCat: function() {
+            return model.chosenCat;
+        },
+
+        // Set chosen cat to match what the user clicks on in the list view
+        setChosenCat: function(cat) {
+            model.chosenCat = cat;
+        },
+
+        // Increment score taken from model; tell display view to update itself
+        incrementScore: function() {
+            model.chosenCat.score++;
+            displayView.render();
+        },
+
+    };
+
+    var displayView = {
+
+        // On load, prepare chosen-cat elements in display section
+        init: function() {
+            this.chosenImage = document.getElementById('chosen-image');
+            this.chosenName = document.getElementById('chosen-name');
+            this.chosenScore = document.getElementById('chosen-score');
+
+            // When user clicks on cat image, tell octopus to increment score
+            this.chosenImage.addEventListener('click', function(e) {
+                octopus.incrementScore();
+            });
+
+            // Call the display-view render function
+            this.render();
+        },
+
+        render: function() {
+            // Get info on chosen cat from the octopus; update display view
+            var chosenCat = octopus.getChosenCat();
+            this.chosenImage.src = chosenCat.image;
+            this.chosenName.innerHTML = chosenCat.name;
+            this.chosenScore.innerHTML = chosenCat.score;
+        }
+
+    };
+
+    var listView = {
+
+        // On load, prepare the list element in the list section
+        init: function() {
+            this.catList = document.getElementById('cat-list');
+
+            // Call the list-view render function
             this.render();
         },
 
@@ -171,34 +322,40 @@ $(function(){
             // Tell the octopus to get the cat array from the model
             var cats = octopus.getCats();
 
-            // Clear any content from the grid
-            this.catGrid.innerHTML = '';
+            // Clear any content from the list
+            this.catList.innerHTML = '';
 
             // Loop over the cat array received from the octopus
             for (var i = 0; i < cats.length; i++) {
                 var cat = cats[i];
 
-                // Make each cat image into a thumbnail
-                var catImage = document.createElement('img');
-                catImage.className = 'img-thumbnail';
-                catImage.src = cat.image;
+                // Make each cat name into a button separated by a line break
+                var catName = document.createElement('button');
+                var lineBreak = document.createElement('p');
+                catName.innerHTML = cat.name;
 
-                // Create a thumbnail container
-                var thumbnail = document.createElement('figure');
-                thumbnail.className = 'col-lg-2';
+                // Add the button and line break to the list section
+                this.catList.appendChild(catName);
+                this.catList.appendChild(lineBreak);
 
-                // Add image to container, and container to grid
-                this.thumbnail.appendChild(catImage);
-                this.catGrid.appendChild(thumbnail);
+                // When user clicks on name, tell octopus to set chosen cat
+                catName.addEventListener('click', (function(catCopy) {
+                    return function() {
+                        octopus.setChosenCat(catCopy);
+
+                        // Update the display view to show the chosen cat
+                        displayView.render();
+                    };
+                })(cat));
             }
         }
     };
-*/
+
     // Load the octopus
     octopus.init();
 
 });
-
+*/
 
 /* ------------------------------------------------------------------
 CAT CLICKER PREMIUM
@@ -208,32 +365,32 @@ CAT CLICKER PREMIUM
 var cats = [
     {
         name: 'Tiny',
-        img: 'images/cat1.jpg',
+        image: 'images/cat1.jpg',
         score: 0,
     },
     {
         name: 'Blue',
-        img: 'images/cat2.jpg',
+        image: 'images/cat2.jpg',
         score: 0,
     },
     {
         name: 'Twins',
-        img: 'images/cat3.jpg',
+        image: 'images/cat3.jpg',
         score: 0,
     },
     {
         name: 'Scaredy',
-        img: 'images/cat4.jpg',
+        image: 'images/cat4.jpg',
         score: 0,
     },
     {
         name: 'Aristo',
-        img: 'images/cat5.jpg',
+        image: 'images/cat5.jpg',
         score: 0,
     },
     {
         name: 'Cutie',
-        img: 'images/cat6.jpg',
+        image: 'images/cat6.jpg',
         score: 0,
     },
 ];
@@ -241,9 +398,9 @@ var cats = [
 // http://www.w3schools.com/jsref/met_node_appendchild.asp
 
 // Add image element for the chosen cat in the display section
-var displayImg = document.createElement('img');
-displayImg.className = 'img-responsive';
-$('#chosen-image').append(displayImg);
+var displayImage = document.createElement('img');
+displayImage.className = 'img-responsive';
+$('#chosen-image').append(displayImage);
 
 // Add text elements for the name and score in the display section
 var displayName = document.createElement('h2');
@@ -279,13 +436,13 @@ for (var i = 0; i < cats.length; i++) {
             $('#chosen-score').html("");
 
             // Append chosen cat image, name and score to display section
-            $('#chosen-image').append('<img class="img-responsive" src="' + catCopy.img + '">');
+            $('#chosen-image').append('<img class="img-responsive" src="' + catCopy.image + '">');
             $('#chosen-name').append(catCopy.name);
             $('#chosen-score').append(catCopy.score);
 
             // On click, delete previous score total and increment the score
-            var chosenImg = document.getElementById('chosen-image');
-            chosenImg.onclick = function() {
+            var chosenImage = document.getElementById('chosen-image');
+            chosenImage.onclick = function() {
                 $('#chosen-score').html("");
                 catCopy.score++;
                 $('#chosen-score').append(catCopy.score);
@@ -294,9 +451,9 @@ for (var i = 0; i < cats.length; i++) {
     })(cat));
 
     // Create a thumbnail image of each cat
-    var imgElem = document.createElement('img');
-    $(imgElem).attr({
-        src: cats[i].img,
+    var imageElem = document.createElement('img');
+    $(imageElem).attr({
+        src: cats[i].image,
         class: 'img-thumbnail',
     });
 
@@ -308,7 +465,7 @@ for (var i = 0; i < cats.length; i++) {
     // Create a container for each cat thumbnail and score
     var catContainer = document.createElement('figure');
     catContainer.className = 'col-lg-2';
-    $(catContainer).append(imgElem, scoreElem);
+    $(catContainer).append(imageElem, scoreElem);
 
     // Append each container to the grid section
     var catGrid = document.getElementById('grid');

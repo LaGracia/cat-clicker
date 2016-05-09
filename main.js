@@ -1,6 +1,8 @@
 /* This is a mini-project for the JavaScript Design Patterns unit. 
 * Each set of requirements is a quiz. Instead of overwriting the code 
-* after every quiz, I have commented out the previous solution. */
+* after every quiz, I commented out the previous solution and added
+* new code on top of the page. Uncomment each solution here and in 
+* the HTML file, and each version of the site should still work. */
 
 /* ------------------------------------------------------------------
 CAT CLICKER PREMIUM PRO
@@ -116,7 +118,6 @@ $(function(){
             displayView.render();
             adminView.hide();
         }
-
     };
 
     var displayView = {
@@ -144,7 +145,6 @@ $(function(){
             this.chosenName.innerHTML = chosenCat.name;
             this.chosenScore.innerHTML = chosenCat.score;
         }
-
     };
 
     var listView = {
@@ -247,7 +247,6 @@ $(function(){
         hide: function(){
             admin.style.display = 'none';
         }
-
     };
 
     // Load the octopus
@@ -259,7 +258,6 @@ $(function(){
 * https://github.com/KelseySteele/Cat-Clicker-Premium-Pro/blob/master/js/main.js
 * https://github.com/GiorgioMartini/Cat-Clicker-Premium-Pro/blob/master/main.js
 * https://discussions.udacity.com/t/cat-clicker-premium-pro-update-values-from-form/164746/3 */
-
 
 /* ------------------------------------------------------------------
 CAT CLICKER PREMIUM WITH OCTOPUS

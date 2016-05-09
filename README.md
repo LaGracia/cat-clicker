@@ -1,12 +1,14 @@
 ## Description
 
-This is a Udacity minicourse project for JavaScript Design Patterns. The project consists of five quizzes. Each quiz features a number of cats and interactive components:
+This is a Udacity minicourse project for JavaScript Design Patterns. The project consists of five quizzes. Each quiz features a number of cats and JS components:
 
-1. One cat
-2. Two cats
-3. At least five cats
-4. Cat Clicker Premium: Model-View-Octopus code organization
-5. Cat Clicker Premium Pro: Admin controls
+1. Cat Clicker with one cat
+2. Cat Clicker with two cats
+3. CC Premium, with at least five cats
+4. CC Premium with Octopus, using MVO code organization
+5. CC Premium Pro, with admin controls
+
+Instead of overwriting each quiz solution as the project went on, I commented out the previous results and rewrote HTML and JS code to the next required specs. Uncomment each of the solutions, and that version of the site should still work.
 
 ### Project details
 
@@ -18,7 +20,7 @@ The final version of the site includes an admin view. This consists of buttons a
 
 ### Credits
 
-As always, I completed this project mainly by learning from others in the Udacity discussion forum, so thanks to all who posted questions and answered them there. My JS file includes where I found the solutions to the most difficult aspects of each quiz.
+As always, I completed this project mainly by learning from others in the Udacity discussion forum, so thanks to all who posted questions and answered them there. My JS comments include where I found the solutions to the most difficult aspects of each quiz.
 
 ### License
 

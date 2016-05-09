@@ -49,13 +49,14 @@ $(function(){
             }
         ],
 
-        // Keep the admin form hidden by default
+        // Hide the admin form by default
+        formIsVisible: false
 
     };
 
     var octopus = {
 
-        // On load, set chosen cat to the first one in the array in the model
+        // On load, set chosen cat in the model to the first one in the array
         init: function() {
             model.chosenCat = model.cats[0];
 
@@ -63,6 +64,7 @@ $(function(){
             displayView.init();
             listView.init();
             adminView.init();
+            adminView.hide();
         },
 
         // Get all cats from the model for the list view
@@ -70,7 +72,7 @@ $(function(){
             return model.cats;
         },
 
-        // Get the chosen cat from the model for the display view
+        // Get the chosen cat from the model for the display and admin views
         getChosenCat: function() {
             return model.chosenCat;
         },
@@ -86,17 +88,40 @@ $(function(){
             displayView.render();
         },
 
-        // Tell the admin view to show the form
-        showForm: function() {
-            // ?
-
+        // Get form visibility from the model
+        // If hidden, tell admin view to show the form and get a new chosen cat
+        // If visible, tell admin view to hide the form
+        toggleForm: function() {
+            if (model.formIsVisible == false) {
+                model.formIsVisible = true;
+                adminView.show();
+                adminView.render();
+            }
+            else if (model.formIsVisible == true) {
+                model.formIsVisible = false;
+                adminView.hide();
+            }
+        },
+    
+        // Tell admin view to hide the form without saving the user input
+        hideForm: function() {
+            adminView.hide();
+        },
+    
+        // Tell model to save user input; tell views to update and hide form
+        saveForm: function() {
+            model.chosenCat.name = adminView.nameInput.value;
+            model.chosenCat.image = adminView.imageInput.value;
+            model.chosenCat.score = adminView.scoreInput.value;
+            displayView.render();
+            adminView.hide();
         }
 
     };
 
     var displayView = {
 
-        // On load, prepare chosen-cat elements in display section
+        // On load, prepare chosen-cat elements in the display section
         init: function() {
             this.chosenImage = document.getElementById('chosen-image');
             this.chosenName = document.getElementById('chosen-name');
@@ -112,6 +137,7 @@ $(function(){
         },
 
         render: function() {
+
             // Get info on chosen cat from the octopus; update display view
             var chosenCat = octopus.getChosenCat();
             this.chosenImage.src = chosenCat.image;
@@ -159,28 +185,38 @@ $(function(){
 
                         // Update the display view to show the chosen cat
                         displayView.render();
+
+                        // Hide the admin view, to refresh form for chosen cat
+                        adminView.hide();
                     };
                 })(cat));
             }
         }
     };
 
-    // https://github.com/jmmarco/tesla/blob/master/js/main.js
     var adminView = {
 
-        // On load, prepare the elements in the admin section
+        // On load, prepare button elements in the admin section
         init: function() {
             this.adminButton = document.getElementById('admin-button');
-            this.adminForm = document.getElementById('admin-form');
-            this.nameInput = document.getElementById('name-input');
-            this.imageInput = document.getElementById('image-input');
-            this.scoreInput = document.getElementById('score-input');
             this.cancelButton = document.getElementById('cancel-button');
             this.saveButton = document.getElementById('save-button');
 
-            // When user clicks on Admin button, tell octopus to show the form
+            // When Admin button is clicked, tell octopus to show or hide form
             this.adminButton.addEventListener('click', function() {
-                octopus.showForm();
+                octopus.toggleForm();
+            });
+
+            // On Cancel, prevent default submit; tell octopus to hide form
+            this.cancelButton.addEventListener('click', function(event) {
+                event.preventDefault();
+                octopus.hideForm();
+            });
+
+            // On Save, prevent default submit; tell octopus to save input
+            this.saveButton.addEventListener('click', function(event) {
+                event.preventDefault();
+                octopus.saveForm();
             });
 
             // Call the admin-view render function
@@ -188,13 +224,41 @@ $(function(){
         },
 
         render: function() {
-            // ?
-        };
+
+            // Prepare form and input elements in the admin section
+            this.admin = document.getElementById('admin');
+            this.nameInput = document.getElementById('name-input');
+            this.imageInput = document.getElementById('image-input');
+            this.scoreInput = document.getElementById('score-input');
+
+            // Tell octopus to fill the form with info from the chosen cat
+            var chosenCat = octopus.getChosenCat();
+            this.nameInput.value = chosenCat.name;
+            this.imageInput.value = chosenCat.image;
+            this.scoreInput.value = chosenCat.score;
+        },
+    
+        // Show the form
+        show: function(){
+            admin.style.display = 'block';
+        },
+        
+        // Hide the form
+        hide: function(){
+            admin.style.display = 'none';
+        }
+
+    };
 
     // Load the octopus
     octopus.init();
 
 });
+
+/* Parts of this code were adapted from the following -
+* https://github.com/KelseySteele/Cat-Clicker-Premium-Pro/blob/master/js/main.js
+* https://github.com/GiorgioMartini/Cat-Clicker-Premium-Pro/blob/master/main.js
+* https://discussions.udacity.com/t/cat-clicker-premium-pro-update-values-from-form/164746/3 */
 
 
 /* ------------------------------------------------------------------
@@ -248,7 +312,7 @@ $(function(){
 
     var octopus = {
 
-        // On load, set chosen cat to the first one in the array in the model
+        // On load, set chosen cat in the model to the first one in the array
         init: function() {
             model.chosenCat = model.cats[0];
 
@@ -282,7 +346,7 @@ $(function(){
 
     var displayView = {
 
-        // On load, prepare chosen-cat elements in display section
+        // On load, prepare chosen-cat elements in the display section
         init: function() {
             this.chosenImage = document.getElementById('chosen-image');
             this.chosenName = document.getElementById('chosen-name');
@@ -298,6 +362,7 @@ $(function(){
         },
 
         render: function() {
+
             // Get info on chosen cat from the octopus; update display view
             var chosenCat = octopus.getChosenCat();
             this.chosenImage.src = chosenCat.image;

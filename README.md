@@ -1,12 +1,20 @@
 ## Description
 
-This is a Udacity minicourse project for JavaScript Design Patterns. The project is made up of several quizzes.
+This is a Udacity minicourse project for JavaScript Design Patterns. The project consists of five quizzes. Each quiz features a number of cats and interactive components:
+
+1. One cat
+2. Two cats
+3. At least five cats
+4. Cat Clicker Premium: Model-View-Octopus code organization
+5. Cat Clicker Premium Pro: Admin controls
 
 ### Project details
 
-The [site](http://lagracia.github.io/cat-clicker/) features a list of cats and an area to display the selected cat. Users choose a cat by clicking on the button showing its name. An image of the selected cat, its name, and its score will show up in the display area.
+The [page](http://lagracia.github.io/cat-clicker/) features a list of cats and an area to display one selected cat. Users choose a cat by clicking on the button showing its name. An image of the selected cat, its name, and its score shows up in the display area.
 
-The score for the chosen cat increases every time the user clicks on its image. When a second cat is chosen, the score for the first cat does not reset. It will continue from where it left off when the user chooses the first cat again.
+The score for the chosen cat increases every time the user clicks on its image. When a second cat is chosen, the score for the first cat does not reset. It will continue from where it left off when the user clicks on the first cat again.
+
+The final version of the site includes an admin view. This consists of buttons and a form with input fields.
 
 ### Credits
 

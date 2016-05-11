@@ -1,12 +1,13 @@
 /* This is a mini-project for the JavaScript Design Patterns unit. 
-* Each set of requirements is a quiz. Instead of overwriting the code 
-* after every quiz, I commented out the previous solution and added
-* new code on top of the page. Uncomment each solution here and in 
-* the HTML file, and each version of the site should still work. */
+ * Each set of requirements is a quiz. Instead of overwriting the code 
+ * after every quiz, I commented out the previous solution and added
+ * new code on top of the page. Uncomment each solution here and in 
+ * the HTML file, and each version of the site should still work.
+ */
 
 /* ------------------------------------------------------------------
-CAT CLICKER PREMIUM PRO
------------------------------------------------------------------- */
+   CAT CLICKER PREMIUM PRO
+   ------------------------------------------------------------------ */
 
 // Wait for document to finish loading before running the enclosed functions
 // http://www.w3schools.com/jquery/jquery_syntax.asp
@@ -251,17 +252,17 @@ $(function(){
 
     // Load the octopus
     octopus.init();
-
 });
 
-/* Parts of this code were adapted from the following -
-* https://github.com/KelseySteele/Cat-Clicker-Premium-Pro/blob/master/js/main.js
-* https://github.com/GiorgioMartini/Cat-Clicker-Premium-Pro/blob/master/main.js
-* https://discussions.udacity.com/t/cat-clicker-premium-pro-update-values-from-form/164746/3 */
+/* Parts of the above code were adapted from the following -
+ * https://github.com/KelseySteele/Cat-Clicker-Premium-Pro/blob/master/js/main.js
+ * https://github.com/GiorgioMartini/Cat-Clicker-Premium-Pro/blob/master/main.js
+ * https://discussions.udacity.com/t/cat-clicker-premium-pro-update-values-from-form/164746/3
+ */
 
 /* ------------------------------------------------------------------
-CAT CLICKER PREMIUM WITH OCTOPUS
------------------------------------------------------------------- 
+   CAT CLICKER PREMIUM WITH OCTOPUS
+   ------------------------------------------------------------------ 
 
 // Wait for document to finish loading before running the enclosed functions
 // http://www.w3schools.com/jquery/jquery_syntax.asp
@@ -305,7 +306,6 @@ $(function(){
                 score: 0,
             },
         ]
-
     };
 
     var octopus = {
@@ -339,7 +339,6 @@ $(function(){
             model.chosenCat.score++;
             displayView.render();
         },
-
     };
 
     var displayView = {
@@ -367,7 +366,6 @@ $(function(){
             this.chosenName.innerHTML = chosenCat.name;
             this.chosenScore.innerHTML = chosenCat.score;
         }
-
     };
 
     var listView = {
@@ -416,13 +414,13 @@ $(function(){
 
     // Load the octopus
     octopus.init();
-
 });
+
 */
 
 /* ------------------------------------------------------------------
-CAT CLICKER PREMIUM
------------------------------------------------------------------- 
+   CAT CLICKER PREMIUM
+   ------------------------------------------------------------------ 
 
 // Array of cat names, images, initial scores
 var cats = [
@@ -533,13 +531,13 @@ for (var i = 0; i < cats.length; i++) {
     // Append each container to the grid section
     var catGrid = document.getElementById('grid');
     $(catGrid).append(catContainer);
-
 };
+
 */
 
 /* ------------------------------------------------------------------
-CAT CLICKER WITH TWO CATS
------------------------------------------------------------------- 
+   CAT CLICKER WITH TWO CATS
+   ------------------------------------------------------------------ 
 
 // https://gist.github.com/frankyonnetti/8373904
 
@@ -556,11 +554,12 @@ $('#blue').click(function() {
     count++;
     $('#bluescore').html(count);
 });
+
 */
 
 /* ------------------------------------------------------------------
-CAT CLICKER WITH ONE CAT
------------------------------------------------------------------- 
+   CAT CLICKER WITH ONE CAT
+   ------------------------------------------------------------------ 
 
 // https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
 
@@ -583,4 +582,5 @@ elem.addEventListener('click', function() {
     modifyText('Again!');
     countClicks();
 }, false);
+
 */

@@ -13,7 +13,12 @@
 // http://www.w3schools.com/jquery/jquery_syntax.asp
 $(function(){
 
-    var model = {
+    // Declare variables to be defined
+    var model, octopus, displayView, listView, adminView;
+
+    /* -------------------------------------------------------------- */
+    
+    model = {
 
         // Define the chosen cat as a null object by default
         chosenCat: null,
@@ -23,41 +28,42 @@ $(function(){
             {
                 name: 'Tiny',
                 image: 'images/cat1.jpg',
-                score: 0,
+                score: 0
             },
             {
                 name: 'Blue',
                 image: 'images/cat2.jpg',
-                score: 0,
+                score: 0
             },
             {
                 name: 'Twins',
                 image: 'images/cat3.jpg',
-                score: 0,
+                score: 0
             },
             {
                 name: 'Scaredy',
                 image: 'images/cat4.jpg',
-                score: 0,
+                score: 0
             },
             {
                 name: 'Aristo',
                 image: 'images/cat5.jpg',
-                score: 0,
+                score: 0
             },
             {
                 name: 'Cutie',
                 image: 'images/cat6.jpg',
-                score: 0,
+                score: 0
             }
         ],
 
         // Hide the admin form by default
         formIsVisible: false
-
     };
 
-    var octopus = {
+    /* -------------------------------------------------------------- */
+    
+    octopus = {
 
         // On load, set chosen cat in the model to the first one in the array
         init: function() {
@@ -121,7 +127,9 @@ $(function(){
         }
     };
 
-    var displayView = {
+    /* -------------------------------------------------------------- */
+    
+    displayView = {
 
         // On load, prepare chosen-cat elements in the display section
         init: function() {
@@ -148,7 +156,9 @@ $(function(){
         }
     };
 
-    var listView = {
+    /* -------------------------------------------------------------- */
+    
+    listView = {
 
         // On load, prepare the list element in the list section
         init: function() {
@@ -195,7 +205,9 @@ $(function(){
         }
     };
 
-    var adminView = {
+    /* -------------------------------------------------------------- */
+    
+    adminView = {
 
         // On load, prepare button elements in the admin section
         init: function() {
@@ -250,6 +262,8 @@ $(function(){
         }
     };
 
+    /* -------------------------------------------------------------- */
+    
     // Load the octopus
     octopus.init();
 });

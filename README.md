@@ -22,6 +22,8 @@ The final version of the site includes an admin view. This consists of buttons a
 
 As always, I completed this project mainly by learning from others in the Udacity discussion forum, so thanks to all who posted questions and answered them there. My JS comments include where I found the solutions to the most difficult aspects of each quiz.
 
+P.S. I used pictures of cats returned from Google searches, so some or all of these may be copyrighted. No infringement intended.
+
 ### License
 
 This repository is licensed under [GitHub’s terms of service](https://help.github.com/articles/github-terms-of-service/), meaning you can view and fork it.

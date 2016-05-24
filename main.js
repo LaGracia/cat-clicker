@@ -152,6 +152,7 @@ $(function(){
             var chosenCat = octopus.getChosenCat();
             this.chosenImage.src = chosenCat.image;
             this.chosenName.innerHTML = chosenCat.name;
+            this.chosenName.style.fontWeight="bold";
             this.chosenScore.innerHTML = chosenCat.score;
         }
     };
